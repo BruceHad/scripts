@@ -35,6 +35,3 @@ Script also assumes that the reports to be compared will have the same names and
 Then you can just supply path/to/before and path/to/after/ and the script will find the reports and run the comparisons.
 
 Now you can run the script from the root directory.
-
-
-
