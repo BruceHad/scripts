@@ -1,3 +1,0 @@
-## Reading a file
-
-## Edifact
