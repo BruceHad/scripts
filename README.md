@@ -7,4 +7,5 @@ Quick scripts and one liners.
 2. Parse Edifact -- (In progress) Python script reads in edifact files and export the values in a more readable format.
 3. DiffReports -- DOS command to run multiple excel Report comparisons using [ExcelCompare](https://github.com/na-ka-na/ExcelCompare). Saves a bit of typing each time.
 4. Number Distance Checks -- Python script that compares candidate ids to active ids (Hamming Distance), to reduce the risks of collisions due to read errors.
+5. filter_reports -- Python script that separates report files based on the location id contained in the filename.
 
