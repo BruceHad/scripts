@@ -3,9 +3,9 @@ import sys, os
 
 DB = 'test.db' # default db
 
-def run_query(query, output_file = None):
+def run_query(query):
 	""" Runs a query against the DB. 
-		Query be either a file path or a string.
+		Query can be either a file path or a string.
 		Results is a Dict containing two items, headers and rows.
 	"""	
 	# Read the query from file or set as string.
@@ -24,20 +24,22 @@ def run_query(query, output_file = None):
 	for row in query:
 		results['rows'].append([i for i in row])
 	con.close()
+	
 	return results
 
 def write_results(results, output_file):
+	""" Write the results of the query to a file
+	"""
 	with open(output_file, 'w') as f:
-		# Write header
 		f.write(', '.join(results['header']))
 		f.write('\n')
-		# Write rows
 		for row in results['rows']:
 			f.write(', '.join(row))
 			f.write('\n')
 
 def print_rows(results, n):
-	""" Prints the first n rows of the query."""
+	""" Prints the first n rows of the query. 
+	"""
 	print(', '.join(results['header']))
 	i = 0
 	for row in results['rows']:
@@ -47,8 +49,6 @@ def print_rows(results, n):
 			print('...')
 			return
 	
-
-
 def set_db(db):
 	global DB
 	if not os.path.exists(db): sys.exit('DB cannot be found')
