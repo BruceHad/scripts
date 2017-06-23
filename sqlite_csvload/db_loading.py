@@ -41,15 +41,19 @@ def sqlify_row(row):
 		for inserting into sql string. 
 		To do: don't treat all values as strings???
 		
-	>>> sqlify_row('"ID","SURNAME","FORENAME","DATE_OF_BIRTH","EMAIL_ADDRESS"\\n')
+	>>> sqlify_row('"ID","SURNAME","FORENAME","DATE_OF_BIRTH","EMAIL_ADDRESS"')
 	'"ID", "SURNAME", "FORENAME", "DATE_OF_BIRTH", "EMAIL_ADDRESS"'
 	>>> sqlify_row('96867,1988-12-09 00:00,1993-07-02,"TEST"\\n')
 	'"96867", "1988-12-09 00:00", "1993-07-02", "TEST"'
+	>>> sqlify_row('"id","surname","EMAIL\\n"')
+	'"id", "surname", "EMAIL"'
 	"""
-	chars = '\'"\n' # characters to strip out
-	row = [i.strip(chars) for i in row.split(',')]
-	row = ['"{}"'.format(i) for i in row] # re-wrap it in quotes
-	return ', '.join(row)
+	chars = ['\n','\'','"'] # characters to strip out
+	values = row.split(',')
+	for c in chars:
+		values = [i.replace(c, '') for i in values]
+	values = ['"{}"'.format(i) for i in values] # re-wrap it in quotes
+	return ', '.join(values)
 
 def load_csv(cur, f_path):
 	""" Load csv from f_path to db table """
